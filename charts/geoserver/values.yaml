@@ -88,7 +88,7 @@ ingress:
     - host: geoserver-demo.teren4d.com
   tls:
     - hosts:
-        - geoserver-demo.teren4d.com
+        - geoserver-app.teren4d.com
       secretName: teren-geoserver-demo-tls
 
 resources: {}
