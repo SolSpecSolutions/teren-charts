@@ -11,7 +11,7 @@ image:
 auth:
   existingSecret: geoserver-app-secret
   usernameKey: username
-  passwordKey: password
+  passwordKey: geoserver-admin-password
 
 cors:
   enabled: true
