@@ -1,36 +1,12 @@
 # geoserver
 A simple Helm chart for GeoServer
 
-
-## TL;DR;
-
 ## Prerequisites
 
 - Kubernetes 1.16+
+- Rancher
 - helm 3
 - PV provisioner support in the underlying infrastructure
-
-## Installing the Chart
-
-To install the chart with the release name `my-release`:
-
-```bash
-$ helm install --name my-release ncsa/geoserver
-```
-
-The command deploys GeoServer on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
-
-> **Tip**: List all releases using `helm list`
-
-## Uninstalling the Chart
-
-To uninstall/delete the `my-release` deployment:
-
-```bash
-$ helm delete my-release
-```
-
-The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Configuration
 
@@ -57,16 +33,12 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 ```bash
 $ helm install --name my-release \
   --set image.tag=2.23.1 \
-    ncsa/geoserver
+    teren-charts/geoserver
 ```
 
 The above command sets the geoserver image's tag to `2.23.1`.
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
-
-```bash
-$ helm install --name my-release -f values.yaml ncsa/geoserver
-```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
 
@@ -86,20 +58,6 @@ $ helm install --set persistence.existingClaim=PVC_NAME geoserver
 
 ## ChangeLog
 
-### 1.1.0
-
-- Added extra configuration option for setting Java memory heap size.
-- Fixed bugs in the chart
-- Port name changed to 'geoserver' from 'http'
-
 ### 1.0.0
 
 - Initial release of helm chart
-
-### 0.2.0
-
-- Test version of helm chart
-
-### 0.1.0 
-
-- IGNORE, this is a typo, should be 1.0.0
