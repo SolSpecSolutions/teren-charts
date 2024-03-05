@@ -3,17 +3,17 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: docker.osgeo.org/geoserver
+  repository: test1-core-harbor.solspec.io/geoserver/geoserver
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+  imagePullSecrets:
+    - name: harbor-registry
 
 auth:
-  username: 
-  password: 
-  # use an existing secret if specified
-  #existingSecret: geoserver-admin-password
-  #passwordKey: geoserver-admin-password
+  existingSecret: geoserver-app-secret
+  usernameKey: username
+  passwordKey: password
 
 cors:
   enabled: true
