@@ -1,0 +1,133 @@
+# Default values for geoserver.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: docker.osgeo.org/geoserver
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+auth:
+  username: 
+  password: 
+  # use an existing secret if specified
+  #existingSecret: geoserver-admin-password
+  #passwordKey: geoserver-admin-password
+
+cors:
+  enabled: true
+
+extension:
+  install: true
+  stableExtension: ""
+  communityExtension: "sec-keycloak,cog,gcapi-features,ogcapi-images,ogcapi-maps,ogcapi-styles,ogcapi-tiles"
+  communityExtensionURL: "https://build.geoserver.org/geoserver/2.25.x/community-latest"
+
+demoData:
+  skip: true
+
+startup:
+  failureThreshold: 10
+  periodSeconds: 30
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+persistence:
+  size: 50Gi
+  accessModes: ReadWriteOnce
+  #existingClaim: someclaim
+
+# the white list is needed for GUI working properly.
+# the value for this should be the main URL for where geoserver get deployed.
+# the values should be only url without http:// or https://, like "geoserver.example.com"
+whitelist: "geoserver-demo.teren4d.com"
+
+# the following is for the geoserver java memory heap size control
+envs:
+  extraJavaOpts: "-Xms512m -Xmx2g"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod-teren4d
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/whitelist-source-range: >-
+      3.83.21.27/32, 54.187.56.55/32, 52.36.121.203/32, 34.213.177.31/32,
+      38.15.43.225/32, 3.212.210.7, 38.175.171.231/32, 3.84.156.6/32,
+      38.15.45.252/32
+  enabled: true
+  hosts:
+    - host: geoserver-demo.teren4d.com
+  tls:
+    - hosts:
+        - geoserver-demo.teren4d.com
+      secretName: teren-geoserver-demo-tls
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: worker_type
+                operator: In
+                values:
+                  - ondemand-core
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                  - us-east-1a 
+
+extraVolumes:
+  - name: server-config
+    configMap:
+      name: server-config
+
+extraVolumeMounts:
+  - name: server-config
+    mountPath: /opt/config/server.xml
+    subPath: server.xml

@@ -1,0 +1,21 @@
+annotations:
+  artifacthub.io/links: |
+    - name: Docker Image
+      url: https://docker.osgeo.org/geoserver
+    - name: Helm Chart
+      url: https://github.com/teren-charts/charts
+apiVersion: v2
+appVersion: 2.25.x
+description: An open source server for sharing geospatial data.
+home: http://geoserver.org/
+icon: https://raw.githubusercontent.com/geoserver/geoserver/master/doc/en/themes/geoserver/static/geoserver.ico
+maintainers:
+- email: talvarado@teren4d.com
+  name: Tyler Alvarado
+- email: devops@teren4d.com
+  name: Teren Devops
+name: geoserver
+sources:
+- https://github.com/geoserver/geoserver
+type: application
+version: 1.0.0
