@@ -4,11 +4,6 @@ A simple Helm chart for GeoServer
 
 ## TL;DR;
 
-```bash
-$ helm repo add ncsa https://opensource.ncsa.illinois.edu/charts/
-$ helm install geoserver ncsa/geoserver
-```
-
 ## Prerequisites
 
 - Kubernetes 1.16+
