@@ -7,8 +7,6 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
-  imagePullSecrets:
-    - name: harbor-registry
 
 auth:
   existingSecret: geoserver-app-secret
@@ -31,7 +29,8 @@ startup:
   failureThreshold: 10
   periodSeconds: 30
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: harbor-registry
 
 nameOverride: ""
 fullnameOverride: ""
