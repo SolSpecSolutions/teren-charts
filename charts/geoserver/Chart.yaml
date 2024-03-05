@@ -3,7 +3,7 @@ annotations:
     - name: Docker Image
       url: https://docker.osgeo.org/geoserver
     - name: Helm Chart
-      url: https://github.com/teren-charts/charts
+      url: https://github.com/SolSpecSolutions/teren-charts/charts/
 apiVersion: v2
 appVersion: 2.25.x
 description: An open source server for sharing geospatial data.
