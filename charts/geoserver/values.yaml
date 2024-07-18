@@ -95,19 +95,7 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: worker_type
-                operator: In
-                values:
-                  - ondemand-core
-              - key: topology.kubernetes.io/zone
-                operator: In
-                values:
-                  - us-east-1a 
+affinity: {}
 
 extraVolumes:
   - name: server-config
