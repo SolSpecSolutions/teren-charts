@@ -76,32 +76,20 @@ service:
   port: 8080
 
 ingress:
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod-teren4d
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/whitelist-source-range: >-
-      3.83.21.27/32, 54.187.56.55/32, 52.36.121.203/32, 34.213.177.31/32,
-      38.15.43.225/32, 3.212.210.7, 38.175.171.231/32, 3.84.156.6/32,
-      38.15.45.252/32
-  enabled: true
+  annotations: {}
+  enabled: false
   hosts:
-    - host: geoserver-demo.teren4d.com
-  tls:
-    - hosts:
-        - geoserver-app.teren4d.com
-      secretName: teren-geoserver-demo-tls
+    - host: chart-example.local
+      paths: []
+  tls: []
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources:
+  limits:
+    cpu: 4000m
+    memory: 4Gi
+  requests:
+    cpu: 2000m
+    memory: 2Gi
 
 nodeSelector: {}
 
