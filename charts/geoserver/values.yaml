@@ -8,10 +8,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-auth:
-  existingSecret: geoserver-app-secret
-  usernameKey: username
-  passwordKey: geoserver-admin-password
+auth: {}
 
 cors:
   enabled: true
